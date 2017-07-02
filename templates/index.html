@@ -1,0 +1,13 @@
+{% extends "base/layout.html" %}
+{% load static from staticfiles %}
+<!DOCTYPE HTML>
+  {% block header %}
+    {% include "base/_header.html" %}
+  {% endblock %}
+
+  {% block body %}
+  <h1>하하하하하하하하</h1>
+  <img src="{% static 'images/pic01.jpg' %}">
+  <h2>동해물과 백두산이 마르고 닳도록</h2>
+  {% endblock %}
+

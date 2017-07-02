@@ -1,0 +1,221 @@
+@import url("https://fonts.googleapis.com/css?family=Raleway:400,500,700");
+@import url("http://fonts.googleapis.com/earlyaccess/nanumgothic.css");
+
+/* General */
+h1, h2, h3, h4, h5, h6 {
+    margin:0;
+    font-family:'Nanum Gothic';
+    font-weight:700;
+}
+
+body {
+    background-color: lightgray;
+}
+
+ul {
+    padding:0;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    color:black;
+}
+
+a:hover{
+    color: gray;
+    text-decoration: none;
+}
+
+/* layout */
+
+.container {
+    width:100%;
+}
+
+.container-fluid {
+    padding:0;
+}
+
+.main-block {
+    margin:15px 50px 15px 50px;
+    padding:40px 40px 40px 40px;
+    background-color:white;
+}
+
+
+/* header */
+#header {
+    padding:15px 10px 15px 80px;
+    background-color: #3a3a3a;
+}
+
+#header img {
+    width:25px;
+}
+
+#title {
+    color:white;
+    font-family: Raleway;
+    font-size:20px;
+    font-weight: 500;
+}
+
+#header-menu {
+    margin:0;
+    padding-top:5px;
+    float:right;
+}
+
+#header-menu .menu {
+    position:relative;
+    display:inline;
+    margin-right: 40px;
+}
+
+#header-menu a {
+    color:lightgray;
+}
+
+#header-menu a:hover {
+    color:white;
+}
+
+#header-menu i {
+    color:lightgray;
+}
+
+#header-menu #login {
+    display:none;
+}
+
+.dropdown-area {
+    display:none;
+    position:absolute;
+    left:-30px;
+    padding-top:20px;
+}
+
+.dropdown {
+    width:100px;
+    padding: 10px 20px 10px 20px;
+    background-color:rgba(0, 0, 0, 0.6);
+}
+
+.dropdown a {
+    margin-bottom:8px;
+}
+
+#picture {
+    height: 200px;
+    background-image: url("/statics/css/images/overlay.png"), url("/statics/images/banner.jpg");
+}
+
+/* post list */
+button {
+    display:inline-block;
+}
+
+#table-toolbar {
+    margin-bottom: 10px;
+}
+
+#word {
+    width:160px;
+    display:inline;
+}
+
+#search-form {
+    display:inline;
+}
+
+#list-option {
+    float:right;
+    padding:5px
+}
+
+#list-view {
+    display: none;
+}
+
+.table-wrapper {
+    overflow: hidden;
+}
+
+#photo-view {
+    width:100%;
+}
+
+#photo-view span {
+    font-size: 15px;
+    font-weight: 300;
+}
+
+#photo-view img {
+    width:200px;
+    float:left;
+    margin-right:10px
+}
+
+#photo-view td {
+    padding: 5px 0px 5px 0px;
+    border-bottom:1px solid lightgray;
+}
+
+#photo-view div {
+    min-width: 500px;
+}
+
+/* post */
+#post-header {
+    overflow: hidden;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid lightgray;
+}
+
+#post-header h2 {
+    margin-bottom: 5px;
+}
+
+#post-header h4 {
+    float:left;
+    font-weight: 500;
+}
+
+#post-header a {
+    margin-left: 10px;
+}
+
+#post-header img {
+    margin-top: 10px;
+    width: 100%;
+}
+
+/* footer */
+footer {
+    background-color: #3a3a3a;
+    padding:20px 0px 20px 0;
+}
+
+#footer {
+    display: table;
+    margin:0 auto;
+}
+
+footer li {
+    display:inline;
+    color:white;
+}
+
+footer a {
+    color:white;
+}
+
+footer p {
+    width:100%;
+    text-align: center;
+    color:white;
+}

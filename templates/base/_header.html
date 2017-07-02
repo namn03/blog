@@ -1,0 +1,46 @@
+{% load static from staticfiles %}
+<!-- Header -->
+<header>
+  <div id="header">
+    <a id="title" href="/">NAMSAN's blog</a>
+    <img src="{% static 'images/icon.png' %}"/>
+    <nav id="header-menu">
+      <ul>
+        {% if request.user.is_authenticated %}
+        <li class="menu" id="admin">
+          <a href="/admin/">ADMIN</a>
+        </li>
+        <li class="menu" id="logout">
+          <a href="/logout/">LOGOUT</a>
+        </li>
+        {%  else %}
+        <li class="menu" id="login">
+          <a href="/login/">LOGIN</a>
+        </li>
+        {% endif %}
+        {% for large_category in large_categories %}
+        <li class="menu" id="post">
+          <a href="#">{{ large_category.menu_text }}</a>
+          <i class="fa fa-caret-down" aria-hidden="true"></i>
+          <div class="dropdown-area">
+            <ul class="dropdown">
+              {% for category in categories %}
+                {%  if category.large_category == large_category %}
+                <li>
+                  <a href="{% url 'all_post' %}/{{ category.url }}">{{ category.name }}</a>
+                </li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          </div>
+        </li>
+        {% endfor %}
+        <li class="menu" id="about">
+          <a href="#">ABOUT</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div id="picture">
+  </div>
+</header>

@@ -1,0 +1,108 @@
+{% extends "base/layout.html" %}
+{% load static %}
+
+{% block header %}
+  {% include "base/_header.html" %}
+{% endblock %}
+
+{% block body %}
+<!-- Main -->
+<section id="main" class="wrapper">
+    <h1>{{ post.category }}</h1>
+    <div id="table-toolbar">
+      <form id="search-form" method="GET">
+        {% csrf_token %}
+        <input id="word" name="word" type="text" class="form-control"  placeholder="제목 검색"/>
+        <button type="submit" class="btn btn-default">
+          <i class="fa fa-search" aria-hidden="true"></i>
+        </button>
+      </form>
+      <div id="list-option">
+        <div class="btn-group">
+          <a id="photo-btn" class="btn btn-default btn-sm">
+            <i class="fa fa-th-list" aria-hidden="true"></i>
+          </a>
+          <a id="list-btn" class="btn btn-default btn-sm">
+            <i class="fa fa-bars" aria-hidden="true"></i>
+          </a>
+        </div>
+        {% if request.user.is_authenticated %}
+          <a href="/post/new" id="new" class="btn btn-default btn-sm">
+          <i class="fa fa-plus" aria-hidden="true"></i>
+          </a>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="table-wrapper">
+      <table id="photo-view">
+        <tbody>
+          {% for post in posts %}
+          <tr>
+            <td>
+              <div>
+                {% if post.main_image %}<img class='photo' src="{{ post.main_image.url }}">
+                {% endif %}
+                <div class="text-wrapper">
+                    <a href="/post/{{ post.id }}">
+                      <h2>{{post.title }}
+                        <span>{{ post.date | date:"Y.m.d" }}</span>
+                      </h2>
+                    </a>
+                    {% autoescape off %}
+                    <p class="post-preview">{{ post.content | striptags }}</p>
+                    {% endautoescape %}
+                </div>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <table id="list-view">
+        <thead>
+          <tr>
+            <th id="title" class="row 7u text-center">제목</th>
+            <th id="category" class="row 3u text-center hidden-xs hidden-sm">카테고리</th>
+            <th id="date" class="row 2u text-center">날짜</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for post in posts %}
+          <tr>
+            {% if post.hide %}
+            <td><a href="/post/{{ post.id }}" style="color:gray">{{ post.title }}</a></td>
+            {% else %}
+            <td><a href="/post/{{ post.id }}">{{ post.title }}</a></td>
+            {% endif %}
+            <td class="hidden-xs hidden-sm">{{ post.category }}</td>
+            <td>{{ post.date | date:"Y/m/d" }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <nav class="text-center">
+        <ul class="pagination">
+          <li>
+            <a href="?page={{ prev }}" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          {% for i in range %}
+          {% if i == posts.number %}
+          <li class="active"><a href="?page={{ i }}">{{ i }}</a></li>
+          {% else %}
+          <li><a href="?page={{ i }}">{{ i }}</a></li>
+          {% endif %}
+          {% endfor %}
+          <li>
+            <a href="?page={{ next }}" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</section>
+{% endblock %}

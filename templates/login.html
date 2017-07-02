@@ -1,0 +1,31 @@
+{% extends "base/layout.html" %}
+
+{% load static %}
+
+{% block header %}
+  {% include "base/_header.html" %}
+{% endblock %}
+
+<!-- Main -->
+{% block body %}
+<section id="main" class="wrapper">
+  <div class="container">
+    {% if form.error %}
+      <p> error</p>
+    {% endif %}
+    <form method="post" action="/login/">
+      {% csrf_token %}
+      <input type="hidden" name="next" value="{{next}}" />
+      <div class="row uniform 50%">
+        <div>
+          <input type="text" name="username" id="username" value="" placeholder="ID">
+        </div>
+        <div>
+          <input type="password" name="password" id="password" value="" placeholder="PW">
+        </div>
+      </div>
+      <input type="submit" value="Log In" class="special">
+    </form>
+  </div>
+</section>
+{% endblock %}

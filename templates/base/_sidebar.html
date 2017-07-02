@@ -1,0 +1,20 @@
+<nav id="nav">
+    <ul class="links">
+    <li><a href="/">Home</a></li>
+
+    <hr style="margin:0 0 0 0">
+
+    <li><a href="{% url 'all_post' %}">all posts</a></li>
+    {% for category in categories %}
+    <li><a href="{% url 'all_post' %}/{{ category.url }}">{{ category.name }}</a></li>
+    {% endfor %}
+    
+    <hr style="margin:0 0 0 0">
+
+    {% if request.user.is_authenticated %}
+    <li><a href="{% url 'logout' %}">logout</a></li>
+    {% else %}
+    <li><a href="{% url 'login' %}?next={{request.path }}">login</a></li>
+    {% endif %}
+    </ul>
+</nav>

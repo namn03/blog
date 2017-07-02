@@ -1,0 +1,24 @@
+{% extends "base/layout.html" %}
+
+{% load static %}
+
+{% block resource %}
+  <link rel="stylesheet" href="{% static 'css/editor.css' %}"/>
+{% endblock %}
+
+{% block header %}
+  {% include "base/_header.html" %}
+{% endblock %}
+
+{% block body %}
+<!-- Main -->
+<section id="main" class="wrapper">
+  <div class="container">
+    <form method="POST" class="post-form">
+    {% csrf_token %}
+      {{ form.as_p }}
+      <input type="submit" class="special" value="저장">
+    </form>
+ </div>
+</section>
+{% endblock %}
