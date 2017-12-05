@@ -1,15 +1,9 @@
 from django import forms
 from models import Post
 
-from redactor.widgets import RedactorEditor
-
-
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        widgets = {
-            'content': RedactorEditor(),
-        }
         exclude = [
                 'comments',
         ]
