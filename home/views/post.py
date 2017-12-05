@@ -1,8 +1,10 @@
+from django.http import Http404
 from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.list import ListView
 from django.contrib.auth.mixins import PermissionRequiredMixin
 
+from home.models import Category
 from ..forms import *
 
 
@@ -39,43 +41,37 @@ class PostListView(ListView):
 
     POSTS_IN_PAGE = 10
     PAGES_IN_LINE = 5
-    PREVIEW_CHARS = 200
 
-    model = Post
     template_name = 'list.html'
     context_object_name = 'posts'
     paginate_by = POSTS_IN_PAGE
-    ordering = '-id'
-    category = ""
-    search = ""
+    ordering = '-date'
+
+    category = None
 
     def get(self, request, *args, **kwargs):
+        self.queryset = Post.objects.all()
+
         if 'category' in kwargs:
-            self.category = kwargs['category']
+            category = Category.objects.filter(url=kwargs['category'])
+
+            if category:
+                self.category = category[0]
+                self.queryset = self.queryset.filter(category__url=kwargs['category'])
+            else:
+                raise Http404
+
         if 'word' in request.GET:
-            print request.GET['word']
-            self.search = request.GET['word']
+            self.queryset = self.queryset.filter(title__contains=request.GET['word'])
+
         return super(PostListView, self).get(request, *args, **kwargs)
-
-    def get_queryset(self):
-        if self.category and self.search:
-            return self.model.objects.filter(title__contains=self.search, category__url=self.category)
-        elif self.search:
-            return self.model.objects.filter(title__contains=self.search)
-        elif self.category:
-            return self.model.objects.filter(category__url=self.category)
-        else:
-            return self.model.objects.all()
-
-    def form_valid(self, form):
-        self.search = form.cleaned_data['word']
-
-        return super(PostListView, self).form_valid(form)
 
     def get_context_data(self, **kwargs):
         context = super(PostListView, self).get_context_data(**kwargs)
 
-        # paginating
+        context['category'] = self.category
+
+        # custom paginating
         page = context['page_obj']
         paginator = context['paginator']
 
@@ -95,12 +91,5 @@ class PostListView(ListView):
         context['prev'] = prev_page
         context['next'] = next_page
         context['range'] = current_range
-
-        # posts should contain just preview of content
-        posts = context['posts']
-        for post in posts:
-            original = post.content
-            if len(original) > self.PREVIEW_CHARS:
-                post.content = original[:self.PREVIEW_CHARS]
 
         return context
