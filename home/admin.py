@@ -10,7 +10,7 @@ admin.site.register(LargeCategory)
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ['title', 'category']
-    exclude = ('comments',)
+    list_display = ['title']
+    filter_horizontal = ['category', 'tags']
 
 # Register your models here.

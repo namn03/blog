@@ -1,6 +1,5 @@
 # coding: utf-8
 from __future__ import unicode_literals
-from django.contrib import admin
 
 from django.db import models
 
@@ -39,10 +38,10 @@ class Post(models.Model):
         }
     content = RedactorField(null=False, redactor_options=opt)
     date = models.DateTimeField(auto_now_add=True)
-    category = models.ForeignKey(Category)
+    category = models.ManyToManyField(Category)
     tags = models.ManyToManyField(Tag, blank=True)
     comments = models.PositiveSmallIntegerField(default=0, null=True)
-    main_image = models.ImageField(upload_to='%Y/%m/', null=True, blank=True)
+    image = models.ImageField(upload_to='%Y/%m/', default='default.png', blank=True)
     hide = models.BooleanField(default=False)
 
     def __unicode__(self):
