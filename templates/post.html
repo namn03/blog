@@ -12,17 +12,35 @@
   <div class="container">
     <div id="post-header">
       <h2>{{ post.title }}</h2>
-      <h4>{{ post.date | date:"Y년 m월 d일" }} by namsan</h4>
+      <h5>
+        <i class="fa fa-folder-open-o" aria-hidden="true"></i>
+        {% for category in post.category.all %}
+          {% if forloop.last %}
+            <a href="{{ category.url }}">{{ category.name }}</a>
+          {% else %}
+            <a href="{{ category.url }}">{{ category.name }}, </a>
+          {% endif %}
+        {% endfor %}
+      </h5>
+      <h5>
+        <i class="fa fa-calendar-o" aria-hidden="true"></i>
+        {{ post.date | date:"Y년 m월 d일" }}
+      </h5>
+      <h5>
+        <i class="fa fa-comment-o" aria-hidden="true"></i>
+        {{ post.comment | length }}
+      </h5>
       {% if request.user.is_authenticated %}
-      <a href="{% url "edit_post" post.id %}" class="fa fa-pencil"></a>
-      {% endif %}
-      {% if post.main_image %}
-      <img src="{% get_media_prefix %}{{ post.main_image }}" alt="" />
+      <a href="{% url "edit_post" pk=post.id %}" class="fa fa-pencil"></a>
       {% endif %}
     </div>
+    <hr>
+
+    <div id="post">
     {% autoescape off %}
     <p> {{ post.content }}</p>
     {% endautoescape %}
+    </div>
   </div>
 </section>
 {% endblock %}

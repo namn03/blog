@@ -201,24 +201,22 @@ a:hover{
 }
 
 /* post */
+
 #post-header {
     overflow: hidden;
-    padding-bottom: 20px;
-    margin-bottom: 20px;
-    border-bottom: 1px solid lightgray;
 }
 
 #post-header h2 {
-    margin-bottom: 5px;
+    margin-bottom: 17px;
 }
 
-#post-header h4 {
+#post-header h5 {
     float:left;
-    font-weight: 500;
+    margin-right: 10px;
 }
 
-#post-header a {
-    margin-left: 10px;
+#post-header i {
+    margin-right: 2px;
 }
 
 #post-header img {
