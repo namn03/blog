@@ -1,11 +1,23 @@
 @import url("https://fonts.googleapis.com/css?family=Raleway:400,500,700");
 @import url("http://fonts.googleapis.com/earlyaccess/nanumgothic.css");
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 
 /* General */
-h1, h2, h3, h4, h5, h6 {
+h1, h2 {
+    margin:0;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight:400;
+}
+
+h3, h4, h5, h6 {
     margin:0;
     font-family:'Nanum Gothic';
-    font-weight:700;
+    font-weight:400;
+}
+
+p {
+    font-family:'Nanum Gothic';
+    line-height: 1.5;
 }
 
 body {
@@ -22,11 +34,17 @@ li {
 
 a {
     color:black;
+    font: inherit;
 }
 
 a:hover{
     color: gray;
     text-decoration: none;
+}
+
+.center {
+    display: table;
+    margin: auto;
 }
 
 /* layout */
@@ -110,30 +128,37 @@ a:hover{
 
 #picture {
     height: 200px;
-    background-image: url("/statics/css/images/overlay.png"), url("/statics/images/banner.jpg");
+    background-image: url("/statics/images/banner.jpg");
 }
 
 /* post list */
-button {
-    display:inline-block;
+#table-header {
+    overflow: auto;
 }
 
-#table-toolbar {
-    margin-bottom: 10px;
+#table-title {
+    float:left;
+}
+
+#list-option {
+    padding:5px;
+    float: right;
 }
 
 #word {
     width:160px;
+    height: 25px;
     display:inline;
+}
+
+#search {
+    display: inline-block;
+    padding-top: 4px;
+    padding-bottom: 4px;
 }
 
 #search-form {
     display:inline;
-}
-
-#list-option {
-    float:right;
-    padding:5px
 }
 
 #list-view {
@@ -141,6 +166,7 @@ button {
 }
 
 .table-wrapper {
+    clear:both;
     overflow: hidden;
 }
 
@@ -148,24 +174,30 @@ button {
     width:100%;
 }
 
+#photo-view h2{
+    margin-bottom: 12px;
+}
+
 #photo-view span {
+    color: gray;
     font-size: 15px;
     font-weight: 300;
 }
 
 #photo-view img {
-    width:200px;
+    height: 150px;
+    width: 150px;
     float:left;
-    margin-right:10px
+    margin-right:20px
 }
 
 #photo-view td {
-    padding: 5px 0px 5px 0px;
-    border-bottom:1px solid lightgray;
+    height: 130px;
 }
 
 #photo-view div {
     min-width: 500px;
+    overflow: hidden;
 }
 
 /* post */
@@ -197,7 +229,7 @@ button {
 /* footer */
 footer {
     background-color: #3a3a3a;
-    padding:20px 0px 20px 0;
+    padding:20px 0 20px 0;
 }
 
 #footer {
