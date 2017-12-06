@@ -40,7 +40,6 @@ class Post(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     category = models.ManyToManyField(Category)
     tags = models.ManyToManyField(Tag, blank=True)
-    comments = models.PositiveSmallIntegerField(default=0, null=True)
     image = models.ImageField(upload_to='%Y/%m/', default='default.png', blank=True)
     hide = models.BooleanField(default=False)
 
@@ -51,15 +50,3 @@ class Post(models.Model):
         self.image.delete()
         super(Post, self).delete()
 
-
-class Comment(models.Model):
-    name = models.CharField(max_length=20, null=False)
-    password = models.CharField(max_length=32, null=False)
-    content = models.TextField(null=False)
-    date = models.DateTimeField(auto_now=True)
-
-    def __unicode__(self):
-        return self.name
-
-
-# Create your models here.
